@@ -56,6 +56,9 @@ Extra sample docs and scripts for acpid.
 # acpid-2.0.14-bugfix-incorrect-sizeof-usage-for-memset.patch
 %patch1 -p1
 # >> setup
+# This binary is unintentionally present in older revisions in the git repo.
+# Dist tarball have not contained it - drop it.
+rm -f kacpimon/kacpimon
 # << setup
 
 %build

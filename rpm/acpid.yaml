@@ -4,9 +4,9 @@ Version: 2.0.14
 Release: 1
 Group: System/Daemons
 License: GPLv2+ and BSD
-URL: http://tedfelix.com/linux/acpid-netlink.html
+URL: https://github.com/sailfishos/acpid2
 Sources:
-    - http://tedfelix.com/linux/acpid-%{version}.tar.gz
+    - %{name}-%{version}.tar.gz
     - acpid.video.conf
     - acpid.power.conf
     - acpid.power.sh

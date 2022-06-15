@@ -1,0 +1,115 @@
+* Thu Jan 10 2013 Marko Saukko <marko.saukko@jollamobile.com> - 2.0.14
+- Updated packaging.
+
+* Thu Jan 12 2012 Marko Saukko <marko.saukko@cybercom.com> - 2.0.14
+- Update to version 2.0.14
+- Removed ConsoleKit based session check from acpid.power.sh. 
+  Now it check just if power management binary is running. Added also 
+  /sbin/mce in the list.
+- Added .yaml for spectacle.
+
+* Fri Nov 18 2011 Marko Saukko <marko.saukko@cybercom.com> - 2.0.10
+- Moved systemd service from sysinit.target to multi-user.target.
+- removed unused files storage-fixup-0.2~20090710.tar.bz2, acpid.init,
+  storage-fixup-for-msi-wind-u100.patc
+
+* Wed Jun 01 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 2.0.10
+- latest to latest version 2.0.10 while tracking systemd issues.
+
+* Thu May 26 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 2.0.9
+- Create acpid config file to hold options for systemd setup. 
+
+* Wed May 25 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 2.0.9
+- updated to latest version 2.0.9
+
+* Mon May 02 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 1.0.10 
+- FEA#16109 - [FEA] Implement SystemD as MeeGo init provide
+- Updated the ACPID package to be usable by systemd as needed 
+  to implement systemd as the init provider of MeeGo. For this 
+  a systemd acpid.service file was added and installed. 
+  This will allow systemd to start stop and track the service.  
+
+* Wed Feb 23 2011 William Douglas <william.douglas@linux.intel.com> - 1.0.10
+- (BMC#4073) - Update acpid.lid.sh to avoid going to sleep when system is
+  being shutdown
+
+* Wed Feb 16 2011 Rob Staudinger <robsta@linux.intel.com> - 1.0.10
+- Rectify yesterday's fix re BMC#8700, the process name matching was flawed.
+
+* Tue Feb 15 2011 Rob Staudinger <robsta@linux.intel.com> - 1.0.10
+- moblin-power-icon is now called meego-power-icon update acpid.lid.sh script
+  Fixes: BMC#8700
+
+* Fri Jul 16 2010 Rob Bradford <rob@linux.intel.com> - 1.0.10
+- moblin-power-icon is now called meego-power-icon update power.sh script
+  (part of the fix for BMC#3849)
+
+* Mon Mar 22 2010 Arjan van de Ven <arjan@linux.intel.com> - 1.0.10
+- remove the "randomly call hdparm on some disks" thing; the bios knows
+  best how to program disks, we should not override this.
+  And if there's a case where that were not true, udisk is the right
+  package to deal with that, not acpid.
+
+* Fri Feb 12 2010 Robert Staudinger <robert.staudinger@intel.com> - 1.0.10
+- Replace "dalston-power-applet" with "moblin-power-icon" in power.sh, lid.sh
+
+* Mon Feb 01 2010 Yong Wang <yong.y.wang@intel.com> - 1.0.10
+- Only suspend when closing lid (fixes MB#9279)
+
+* Fri Oct 30 2009 Peter Zhu <peter.j.zhu@intel.com> - 1.0.10
+- Update dalston check in lid.sh fixing MB#2449
+
+* Thu Oct 29 2009 Rob Bradford <rob@linux.intel.com> - 1.0.10
+- Update dalston check to handle the new location for Dalston (fixes MB#7345)
+
+* Mon Oct 05 2009 Anas Nashif <anas.nashif@intel.com> - 1.0.10
+- Update Requires with executable path instead of package
+
+* Wed Aug 26 2009 Anas Nashif <anas.nashif@intel.com> - 1.0.10
+- Make dalston handle power events. (mbz #5383)
+
+* Wed Jul 15 2009 Yan Li <yan.i.li@intel.com> - 1.0.10
+- Install storage-fixup to /usr/sbin
+- Fix errors in start.sh
+
+* Fri Jul 10 2009 Yan Li <yan.i.li@intel.com> - 1.0.10
+- Use storage-fixup (by the Linux ATA/IDE maintainers) and tweak HD
+  power setting only on affected models (Moblin bug #3827)
+- Fix RPMLINT warnings
+
+* Wed Jun 24 2009 Yan Li <yan.i.li@intel.com> - 1.0.10
+- set hdparm on system start-up and resume
+
+* Mon Jun 22 2009 Yan Li <yan.i.li@intel.com> - 1.0.10
+- Improved previous fix of Moblin bug #1721, correctly handling ac
+  events as well as battery events
+
+* Wed Jun 10 2009 Yan Li <yan.i.li@intel.com> - 1.0.10
+- Ported hdparm control script from Debian to fix Moblin bug #1721
+
+* Mon May 25 2009 Anas Nashif <anas.nashif@intel.com> - 1.0.10
+- Fixed Changelog
+- Update to 1.0.10 with integrated CVE fix (CVE-2009-0798)
+
+* Thu May 21 2009 Peter Zhu <peter.j.zhu@intel.com> - 1.0.8-1
+- enable lid.sh to check if dalston-power-applet running
+
+* Tue May 12 2009 Peter Zhu <peter.j.zhu@intel.com> - 1.0.8-1
+- Monitor lid event
+
+* Thu Apr 30 2009 Zhang, Qiang Z <qiang.z.zhang@intel.com> - 1.0.8-1
+- Fix CVE-2009-0798
+
+* Mon Apr 20 2009 Peter Zhu <peter.j.zhu@intel.com> - 1.0.8-1
+- check for xfce4-power-manager
+- ck-list-sessions now returns uid under the field of "unix-user"
+- fixed bug 1726
+
+* Thu Feb 12 2009 Yin Kangkai <kangkai.yin@intel.com> - 1.0.8-1
+- Upgrade to 1.0.8
+
+* Fri Jan 30 2009 Arjan van de Ven <arjan@linux.intel.com> - 1.0.6-9
+- don't use the init script at all; let fastinit take care of starting
+
+* Wed Jan  7 2009 Arjan van de Ven <arjan@linux.intel.com> - 1.0.6-8
+- don't use a stop priority; lets just be killed

@@ -1,0 +1,35 @@
+Name: acpid
+Summary: ACPI Event Daemon
+Version: 2.0.14
+Release: 1
+Group: System/Daemons
+License: GPLv2+ and BSD
+URL: http://tedfelix.com/linux/acpid-netlink.html
+Sources:
+    - http://tedfelix.com/linux/acpid-%{version}.tar.gz
+    - acpid.video.conf
+    - acpid.power.conf
+    - acpid.power.sh
+    - acpid.lid.conf
+    - acpid.lid.sh
+    - acpid.battery.sh
+    - acpid.battery.conf
+    - acpid.ac.conf
+    - acpid-start-script
+    - acpid.start.sh
+    - acpid.service
+    - acpid
+Patches:
+    - acpid-2.0.9-makefile.patch
+    - acpid-2.0.14-bugfix-incorrect-sizeof-usage-for-memset.patch
+Description: acpid is a daemon that dispatches ACPI events to user-space programs.
+
+Configure: none
+Builder: make
+ExclusiveArch: ia64 x86_64 %{ix86}
+SubPackages:
+    - Name: extra-docs
+      Summary: sample docs and sample scripts for apcid
+      Group: Documentation
+      Description: Extra sample docs and scripts for acpid.
+

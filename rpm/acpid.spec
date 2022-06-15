@@ -27,7 +27,7 @@ Source8:    acpid.ac.conf
 Source9:    acpid-start-script
 Source10:    acpid.start.sh
 Source11:    acpid.service
-Source12:    acpid
+Source12:    acpid.conf
 Source100:  acpid.yaml
 Patch0:     acpid-2.0.9-makefile.patch
 Patch1:     acpid-2.0.14-bugfix-incorrect-sizeof-usage-for-memset.patch

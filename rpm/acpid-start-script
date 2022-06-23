@@ -1,0 +1,4 @@
+#!/bin/sh
+
+/usr/sbin/acpid &
+/etc/acpi/actions/start.sh

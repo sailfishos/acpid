@@ -1,0 +1,3 @@
+[submodule "acpid"]
+	path = acpid
+	url = https://github.com/sailfishos-mirror/acpid

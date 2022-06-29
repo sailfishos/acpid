@@ -26,6 +26,7 @@ Requires:   systemd
 Requires(preun): systemd
 Requires(post): systemd
 Requires(postun): systemd
+BuildRequires:  pkgconfig(systemd)
 
 %description
 acpid is a daemon that dispatches ACPI events to user-space programs.
@@ -40,21 +41,16 @@ Extra sample docs and scripts for acpid.
 
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
-# acpid-2.0.9-makefile.patch
-%patch0 -p1
-# acpid-2.0.14-bugfix-incorrect-sizeof-usage-for-memset.patch
-%patch1 -p1
 # This binary is unintentionally present in older revisions in the git repo.
 # Dist tarball have not contained it - drop it.
 rm -f kacpimon/kacpimon
 
 %build
-make %{?jobs:-j%jobs}
+%make_build
 
 %install
-rm -rf %{buildroot}
 %make_install
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/acpi/events
@@ -85,27 +81,28 @@ ln -s ../acpid.service %{buildroot}/%{_lib}/systemd/system/multi-user.target.wan
 
 %preun
 if [ "$1" -eq 0 ]; then
-systemctl stop acpid.service
+systemctl stop acpid.service || :
 fi
 
 %post
-systemctl daemon-reload
-systemctl reload-or-try-restart acpid.service
+systemctl daemon-reload || :
+systemctl reload-or-try-restart acpid.service || :
 
 %postun
-systemctl daemon-reload
+systemctl daemon-reload || :
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README Changelog TODO
+%license COPYING
+%doc README Changelog TODO
 %dir %{_sysconfdir}/acpi
 %dir %{_sysconfdir}/acpi/events
 %dir %{_sysconfdir}/acpi/actions
 %dir %{_sysconfdir}/acpi/ac.d
 %dir %{_sysconfdir}/acpi/battery.d
 %dir %{_localstatedir}/lib/acpi-support
-/%{_lib}/systemd/system/acpid.service
-/%{_lib}/systemd/system/multi-user.target.wants/acpid.service
+%{_unitdir}/acpid.service
+%{_unitdir}/multi-user.target.wants/acpid.service
 %config(noreplace) %attr(0644,root,root) %{_sysconfdir}/acpi/events/videoconf
 %config(noreplace) %attr(0644,root,root) %{_sysconfdir}/acpi/events/powerconf
 %config(noreplace) %attr(0755,root,root) %{_sysconfdir}/acpi/actions/power.sh

@@ -62,7 +62,7 @@ mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/acpi/battery.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/acpi/start.d
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pm/sleep.d
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/lib/acpi-support
-mkdir -p $RPM_BUILD_ROOT/%{_lib}/systemd/system
+mkdir -p $RPM_BUILD_ROOT/%{_unitdir}
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/events/videoconf
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/events/powerconf
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/actions/power.sh
@@ -73,11 +73,11 @@ install -m 644 %{SOURCE7} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/events/batteryconf
 install -m 644 %{SOURCE8} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/events/acconf
 install -m 755 %{SOURCE9} $RPM_BUILD_ROOT%{_sbindir}/acpid-start-script
 install -m 755 %{SOURCE10} $RPM_BUILD_ROOT%{_sysconfdir}/acpi/actions/start.sh
-install -D -m 644 %{SOURCE11} $RPM_BUILD_ROOT/%{_lib}/systemd/system/acpid.service
+install -D -m 644 %{SOURCE11} $RPM_BUILD_ROOT/%{_unitdir}/acpid.service
 install -D -m 644 %{SOURCE12} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/acpid
 
-mkdir -p %{buildroot}/%{_lib}/systemd/system/multi-user.target.wants
-ln -s ../acpid.service %{buildroot}/%{_lib}/systemd/system/multi-user.target.wants/acpid.service
+mkdir -p %{buildroot}/%{_unitdir}/multi-user.target.wants
+ln -s ../acpid.service %{buildroot}/%{_unitdir}/multi-user.target.wants/acpid.service
 
 %preun
 if [ "$1" -eq 0 ]; then

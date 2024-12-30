@@ -1,9 +1,8 @@
 Name:       acpid
 
 Summary:    ACPI Event Daemon
-Version:    2.0.14
+Version:    2.0.34
 Release:    1
-Group:      System/Daemons
 License:    GPLv2+ and BSD
 ExclusiveArch:  ia64 x86_64 %{ix86}
 URL:        https://github.com/sailfishos/acpid2
@@ -17,23 +16,21 @@ Source6:    acpid.battery.sh
 Source7:    acpid.battery.conf
 Source8:    acpid.ac.conf
 Source9:    acpid-start-script
-Source10:    acpid.start.sh
-Source11:    acpid.service
-Source12:    acpid.conf
-Patch0:     acpid-2.0.9-makefile.patch
-Patch1:     acpid-2.0.14-bugfix-incorrect-sizeof-usage-for-memset.patch
+Source10:   acpid.start.sh
+Source11:   acpid.service
+Source12:   acpid.conf
 Requires:   systemd
 Requires(preun): systemd
 Requires(post): systemd
 Requires(postun): systemd
+BuildRequires:  autoconf
 BuildRequires:  pkgconfig(systemd)
 
 %description
 acpid is a daemon that dispatches ACPI events to user-space programs.
 
 %package extra-docs
-Summary:    sample docs and sample scripts for apcid
-Group:      Documentation
+Summary:    Extra sample docs and sample scripts for apcid
 Requires:   %{name} = %{version}-%{release}
 
 %description extra-docs
@@ -48,6 +45,8 @@ Extra sample docs and scripts for acpid.
 rm -f kacpimon/kacpimon
 
 %build
+autoreconf --force --install
+%configure
 %make_build
 
 %install
@@ -92,7 +91,6 @@ systemctl reload-or-try-restart acpid.service || :
 systemctl daemon-reload || :
 
 %files
-%defattr(-,root,root,-)
 %license COPYING
 %doc README Changelog TODO
 %dir %{_sysconfdir}/acpi
@@ -116,27 +114,15 @@ systemctl daemon-reload || :
 %{_bindir}/acpi_listen
 %{_sbindir}/acpid
 %{_sbindir}/acpid-start-script
+%{_sbindir}/kacpimon
 %{_mandir}/man8/acpid.8.gz
 %{_mandir}/man8/acpi_listen.8.gz
+%{_mandir}/man8/kacpimon.8.gz
 
 %files extra-docs
-%defattr(-,root,root,-)
 %doc %{_defaultdocdir}/acpid/COPYING
 %doc %{_defaultdocdir}/acpid/Changelog
 %doc %{_defaultdocdir}/acpid/README
 %doc %{_defaultdocdir}/acpid/TESTPLAN
 %doc %{_defaultdocdir}/acpid/TODO
-%doc %{_defaultdocdir}/acpid/samples/acpi_handler-conf
-%doc %{_defaultdocdir}/acpid/samples/acpi_handler.sh
-%doc %{_defaultdocdir}/acpid/samples/battery/battery-conf
-%doc %{_defaultdocdir}/acpid/samples/battery/battery.sh
-%doc %{_defaultdocdir}/acpid/samples/panasonic/ac_adapt.pl
-%doc %{_defaultdocdir}/acpid/samples/panasonic/ac_adapter
-%doc %{_defaultdocdir}/acpid/samples/panasonic/hotkey
-%doc %{_defaultdocdir}/acpid/samples/panasonic/hotkey.pl
-%doc %{_defaultdocdir}/acpid/samples/power
-%doc %{_defaultdocdir}/acpid/samples/power.sh
-%doc %{_defaultdocdir}/acpid/samples/powerbtn/powerbtn-conf
-%doc %{_defaultdocdir}/acpid/samples/powerbtn/powerbtn.sh
-%doc %{_defaultdocdir}/acpid/samples/powerbtn/powerbtn.sh.old
 %doc %{_defaultdocdir}/acpid/COPYING
